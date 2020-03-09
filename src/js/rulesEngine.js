@@ -1,5 +1,4 @@
-import { OPTIONS, GAME_OUTCOMES } from './constants';
-const { ROCK, PAPER, SCISSORS } = OPTIONS;
+import { ROCK, PAPER, SCISSORS } from './constants';
 
 const rules = {
   [ROCK]: { beats: [SCISSORS] },
