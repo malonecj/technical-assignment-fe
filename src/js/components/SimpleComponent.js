@@ -1,7 +1,8 @@
 export default class SimpleComponent {
-    constructor(container, props) {
+    constructor(container, props, events) {
       this.container = container;
       this.props = props;
+      this.events = events;
     }
   
     render() {
@@ -12,6 +13,9 @@ export default class SimpleComponent {
       }
       if(typeof this.bindEventListeners === 'function') {
         this.bindEventListeners();
+      }
+      if(typeof this.afterRender === 'function') {
+        this.afterRender();
       } 
     }
   }

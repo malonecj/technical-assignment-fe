@@ -4,10 +4,12 @@ export const SCISSORS = 'Scissors';
 
 export const WEAPON_CHOICES = [ROCK, PAPER, SCISSORS];
 
-export const GAME_OUTCOMES = {
- PLAYER1_WIN: 'p1Win',
- PLAYER2_WIN: 'p2Win',
- TIE: 'tie',
+export const GAME_STATUS = {
+ NOT_STARTED: 'Not started',
+ IN_PROGRESS: 'In progress',
+ PLAYER1_WIN: 'Player1Win',
+ PLAYER2_WIN: 'Player2Win',
+ TIE: 'Tie',
 }
 
 export const EVENT_TYPES = {

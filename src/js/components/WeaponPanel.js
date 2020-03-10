@@ -1,37 +1,59 @@
 import './WeaponPanel.scss';
-import '@fortawesome/fontawesome-free/js/all';
 import SimpleComponent from './SimpleComponent';
-import { WEAPON_CHOICES } from '../constants';
+import { WEAPON_CHOICES, GAME_STATUS } from '../constants';
+import Icon from './WeaponIcon';
 
-const Weapon = (name) => `
+const Weapon = name => `
   <li role="button" data-weapon="${name}">
-    <span class="fa-stack fa-7x">
-      <i class="fas fa-circle fa-stack-2x"></i>
-      <i class="fas fa-hand-${name.toLowerCase()} fa-stack-1x fa-inverse"></i>
-      <span class="fa-layers-text fa-inverse" data-fa-transform="rotate--180 shrink-20 down-10" >${name}</span>
-    </span>
+    ${Icon({ icon: `hand-${name}`, text: name })}
 </li>`;
+
+const CPUTurn = player => `
+  <div>
+    <h4>${player.name} is thinking</h4>
+    <i class="fas fa-cog fa-spin"></i>
+  </div>
+`
+
+const HumanTurn = player => WEAPON_CHOICES.map(name => Weapon(name, player)).join('');
 
 export default class WeaponPanel extends SimpleComponent {
 
   bindEventListeners() {
     this.container.addEventListener('click', (event) => {
       const choice = event.target.dataset.weapon;
-      if(WEAPON_CHOICES.indexOf(choice) > -1) {
-        this.props.onWeaponChosen(choice)
+      if (WEAPON_CHOICES.indexOf(choice) > -1) {
+        this.events.onWeaponChosen(choice);
       }
     })
   }
 
+  getCurrentPlayer() {
+    const { players, currentPlayerIndex } = this.props;
+    return players[currentPlayerIndex];
+  }
+
   template() {
+    const currentPlayer = this.getCurrentPlayer();
     return `<div class="weapon">
     <div class="weapon-inner">
-        <h3>Player1: Make your move</h3>
+        <h3>${currentPlayer.name}: Make your move</h3>
         <ul>
-            ${WEAPON_CHOICES.map(name => Weapon(name, this.props.player)).join('')}
+          ${currentPlayer.isCPU ? CPUTurn(currentPlayer) : HumanTurn(currentPlayer)}
         </ul>
     </div>
   </div>`
+  }
+
+  afterRender() {
+    if (this.getCurrentPlayer().isCPU && this.props.status === GAME_STATUS.IN_PROGRESS) {
+      setTimeout(this.simulateCPUTurn.bind(this), 3000);
+    }
+  }
+
+  simulateCPUTurn() {
+    const choice = WEAPON_CHOICES[Math.floor(Math.random() * WEAPON_CHOICES.length)];
+    this.events.onWeaponChosen(choice);
   }
 
 }

@@ -11,8 +11,8 @@ $green: #ade9dd;
     bottom: 0;
     background-color: $purple;
     border-radius: 1rem 1rem 1rem 1rem;
-    max-width: 900px;
-    margin: 0 auto;
+    margin-left: 15%;
+    margin-right: 15%;
 
     .weapon-chosen & {
         bottom: -100%;
@@ -47,5 +47,6 @@ $green: #ade9dd;
 
     .fa-stack {
         pointer-events: none;
+        font-size: 6vw;
     }
 }

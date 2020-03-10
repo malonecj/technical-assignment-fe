@@ -1,32 +1,68 @@
 import WeaponPanel from './WeaponPanel';
+import GameStatus from './GameStatus';
+import ResultsPanel from './ResultsPanel';
+import { GAME_STATUS } from '../constants'; 
+import { determineWinner } from '../rulesEngine';
+
+const createPlayers = () => {
+  const player1 = {
+    name: 'Player 1',
+    isCPU: false,
+    choice: undefined,
+  };
+  const player2 = {
+    name: 'Computer',
+    isCPU: true,
+    choice: undefined,
+  }
+  return [player1, player2];
+}
 
 class App {
 
   constructor() {
+    const players = createPlayers();
     this.state = {
-      player1Choice: undefined,
-      player2Choice: undefined,
-      currentTurn: 'player1'
+      players,
+      currentPlayerIndex: 0,
+      status: GAME_STATUS.IN_PROGRESS,
     }
     this.createWeaponPanel();
+    this.createGameStatus();
+    this.createResultsPanel();
     this.render();
   }
 
   onWeaponChosen(weapon) {
-    console.log(weapon);
+    const { players, currentPlayerIndex } = this.state;
+    players[currentPlayerIndex].choice = weapon;
+    if(currentPlayerIndex === 0) {
+      this.state.currentPlayerIndex +=1;  
+    } else {
+      this.state.status = determineWinner(players[0].choice, players[1].choice);
+    }
+    this.render();
   }
 
   createWeaponPanel() {
     const $el = document.getElementById('weaponPanel');
-    const props = {
-      ...this.state,
-      onWeaponChosen: this.onWeaponChosen
-    }
-    this.weaponPanel = new WeaponPanel($el, props);
+    this.weaponPanel = new WeaponPanel($el, this.state, { onWeaponChosen: this.onWeaponChosen.bind(this) });
+  }
+
+  createGameStatus() {
+    const $el = document.getElementById('gameStatus');
+    this.gameStatus = new GameStatus($el, this.state);
+  }
+
+  createResultsPanel() {
+    const $el = document.getElementById('resultsPanel');
+    this.resultsPanel = new ResultsPanel($el, this.state);
   }
 
   render() {
     this.weaponPanel.render();
+    this.gameStatus.render();
+    this.resultsPanel.render();
   }
 }
 
