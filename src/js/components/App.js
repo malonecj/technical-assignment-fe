@@ -4,19 +4,21 @@ import ResultsPanel from './ResultsPanel';
 import StartScreen from './StartScreen';
 import { GAME_STATUS } from '../constants'; 
 import { determineWinner } from '../rulesEngine';
+import SimpleComponent from './SimpleComponent';
 
-class App {
+class App extends SimpleComponent{
 
-  constructor() {
+  constructor(container) {
+    super(container)
     this.state = {
       currentPlayerIndex: 0,
       status: GAME_STATUS.NOT_STARTED,
       players: [],
     }
     this.createStartScreen();
-    this.createWeaponPanel();
     this.createGameStatusPanel();
     this.createResultsPanel();
+    this.createWeaponPanel();
     this.render();
   }
 
@@ -32,28 +34,32 @@ class App {
   }
 
   createStartScreen() {
-    const $el = document.getElementById('startScreen');
+    const $el = document.createElement('div');
+    this.container.append($el);
     this.startScreen= new StartScreen($el, this.state, { 
       startGame: this.startGame.bind(this) 
     });
   }
 
   createWeaponPanel() {
-    const $el = document.getElementById('weaponPanel');
+    const $el = document.createElement('div');
+    this.container.append($el);
     this.weaponPanel = new WeaponPanel($el, this.state, { 
       onWeaponChosen: this.onWeaponChosen.bind(this)
     });
   }
 
   createGameStatusPanel() {
-    const $el = document.getElementById('gameStatus');
+    const $el = document.createElement('div');
+    this.container.append($el);
     this.gameStatus = new GameStatusPanel($el, this.state, { 
       restartGame: this.resetGame.bind(this)
     });
   }
 
   createResultsPanel() {
-    const $el = document.getElementById('resultsPanel');
+    const $el = document.createElement('div');
+    this.container.append($el);
     this.resultsPanel = new ResultsPanel($el, this.state);
   }
 

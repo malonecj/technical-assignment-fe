@@ -7,7 +7,7 @@ import '../css/index.scss';
 import App from './components/App';
 
 function renderApp() {
-  new App();
+  new App(document.getElementById('appContainer'));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
