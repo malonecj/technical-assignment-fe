@@ -19,4 +19,111 @@ body {
 		flex-direction: row;
 		justify-content: center;
   }
+
+  .game-status {
+    color: $blue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  
+  .player-choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    .name {
+      font-size: large;
+      padding: 5px;
+      background-color: $yellow;
+      border-radius: 1rem 1rem 1rem 1rem;
+    }
+  }
+
+  .results-panel {
+    @include panel;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+  .start-screen {
+    @include panel;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20%;
+    margin-right: 20%;
+
+    .controls {
+      flex-direction: row;
+      margin-bottom: 50px;
+
+      button {
+        cursor: pointer;
+        height: 80px;
+        border-radius: 1rem 1rem 1rem 1rem;
+        align-items: center;
+        width: 120px;
+        margin: 20px;
+      }
+
+      button .text {
+        font-size: medium;
+      }
+    }
+  }
+
+  .weapon {
+    color: $dark-blue;
+    bottom: 0;
+    background-color: $yellow;
+    border-radius: 1rem 1rem 1rem 1rem;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    .weapon-chosen & {
+        bottom: -100%;
+    }
+
+    h3 {
+        padding-top: 20px;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    ul {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    li {
+        width: 24vw;
+        height: 24vw;
+        cursor: pointer;
+        margin: 1rem;
+        background-size: 70%;
+        pointer-events: fill;
+
+    }
+
+    .cpu-turn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .fa-stack {
+        pointer-events: none;
+        font-size: 8vw;
+    }
+  }
 }

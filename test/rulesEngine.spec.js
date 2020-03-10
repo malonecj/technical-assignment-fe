@@ -1,5 +1,5 @@
-import { OPTIONS, GAME_OUTCOMES } from '../src/js/constants';
-const { ROCK, PAPER, SCISSORS } = OPTIONS;
+import { WEAPON_CHOICES, GAME_OUTCOMES } from '../src/js/constants';
+const { ROCK, PAPER, SCISSORS } = WEAPON_CHOICES;
 import { determineWinner } from '../src/js/rulesEngine';
 
 describe('Rules Engine', () => {

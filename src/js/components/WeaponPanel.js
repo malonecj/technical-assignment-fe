@@ -1,4 +1,3 @@
-import './WeaponPanel.scss';
 import SimpleComponent from './SimpleComponent';
 import { WEAPON_CHOICES, GAME_STATUS } from '../constants';
 import Icon from './WeaponIcon';

@@ -1,7 +1,5 @@
 import SimpleComponent from './SimpleComponent';
 
-import './StartScreen.scss';
-
 const createPlayers = ({ isSimulated }) => {
   const player1 = {
     name: 'Player 1',

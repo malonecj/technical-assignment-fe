@@ -1,8 +1,6 @@
 import SimpleComponent from './SimpleComponent';
 import WeaponIcon from './WeaponIcon';
 
-import './GameStatus.scss';
-
 const PlayerChoice = (player) => {
   const icon = player.choice ? `hand-${player.choice}` : `question`;
   return `
@@ -12,7 +10,7 @@ const PlayerChoice = (player) => {
   </div>`
 }
 
-export default class GameStatus extends SimpleComponent {
+export default class GameStatusPanel extends SimpleComponent {
 
   bindEventListeners() {
     const restartBtn = this.container.querySelector('#restartBtn');

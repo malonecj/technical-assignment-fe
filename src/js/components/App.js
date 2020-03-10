@@ -1,5 +1,5 @@
 import WeaponPanel from './WeaponPanel';
-import GameStatus from './GameStatus';
+import GameStatusPanel from './GameStatusPanel';
 import ResultsPanel from './ResultsPanel';
 import StartScreen from './StartScreen';
 import { GAME_STATUS } from '../constants'; 
@@ -15,7 +15,7 @@ class App {
     }
     this.createStartScreen();
     this.createWeaponPanel();
-    this.createGameStatus();
+    this.createGameStatusPanel();
     this.createResultsPanel();
     this.render();
   }
@@ -45,9 +45,9 @@ class App {
     });
   }
 
-  createGameStatus() {
+  createGameStatusPanel() {
     const $el = document.getElementById('gameStatus');
-    this.gameStatus = new GameStatus($el, this.state, { 
+    this.gameStatus = new GameStatusPanel($el, this.state, { 
       restartGame: this.resetGame.bind(this)
     });
   }
