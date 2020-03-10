@@ -40,6 +40,14 @@ body {
     }
   }
 
+  .show {
+    opacity: 1;
+  }
+
+  .hide {
+    opacity: 0;
+  }
+
   .results-panel {
     @include panel;
     margin-top: 50px;
@@ -82,8 +90,6 @@ body {
     bottom: 0;
     background-color: $yellow;
     border-radius: 1rem 1rem 1rem 1rem;
-    margin-left: 10px;
-    margin-right: 10px;
 
     .weapon-chosen & {
         bottom: -100%;
@@ -112,7 +118,6 @@ body {
         margin: 1rem;
         background-size: 70%;
         pointer-events: fill;
-
     }
 
     .cpu-turn {

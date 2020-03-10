@@ -2,9 +2,10 @@ import SimpleComponent from './SimpleComponent';
 import WeaponIcon from './WeaponIcon';
 
 const PlayerChoice = (player) => {
+  const className = player.choice ? 'show' : 'hide';
   const icon = player.choice ? `hand-${player.choice}` : `question`;
   return `
-  <div class="player-choice">
+  <div class="player-choice ${className}">
     ${WeaponIcon({ icon, text: player.choice })}
     <span class="name">${player.name}</span>
   </div>`
@@ -21,7 +22,7 @@ export default class GameStatusPanel extends SimpleComponent {
     return `
     <div>
       <div class="game-status">
-        ${this.props.players.filter(p => p.choice).map(p => PlayerChoice(p)).join('')}
+        ${this.props.players.map(p => PlayerChoice(p)).join('')}
       </div>
       <div class="toolbar">
         <button id="restartBtn">Restart Game</button>

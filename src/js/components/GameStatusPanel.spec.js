@@ -23,23 +23,21 @@ describe('GameStatusPanel', () => {
     const gameStatusPanel = new GameStatusPanel($el, { players }, events);
     gameStatusPanel.render();
     const playerChoices = $el.querySelectorAll('.player-choice');
+    const restartButton = $el.querySelector('button');
     return {
       gameStatusPanel,
-      playerChoices
+      playerChoices,
+      restartButton,
+      events
     }
   }
 
-  it('should render no choices if no choices have been made', () => {
-    const players = createTestPlayers();
-    const { playerChoices } = renderGameStatusPanel(players);
-    expect(playerChoices.length).toEqual(0);
-  });
 
   it('should render player1s choice', () => {
     const players = createTestPlayers();
     players[0].choice = ROCK;
     const { playerChoices } = renderGameStatusPanel(players);
-    expect(playerChoices.length).toEqual(1);
+    expect(playerChoices.length).toEqual(2);
     expect(getPlayerChoiceText(playerChoices[0])).toEqual(ROCK);
   });
 
@@ -52,5 +50,10 @@ describe('GameStatusPanel', () => {
     expect(getPlayerChoiceText(playerChoices[1])).toEqual(PAPER);
   });
 
-
+  it('click restart should restart game', () => {
+    const players = createTestPlayers();
+    const { events, restartButton } = renderGameStatusPanel(players);
+    restartButton.click();
+    expect(events.restartGame).toBeCalledTimes(1);
+  });
 });
