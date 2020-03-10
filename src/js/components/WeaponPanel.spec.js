@@ -1,7 +1,7 @@
 import WeaponPanel from './WeaponPanel';
 import { ROCK, PAPER, SCISSORS, GAME_STATUS } from '../constants';
 import { createTestPlayers, getIconText } from '../../../test/helpers';
-describe('GameStatusPanel', () => {
+describe('WeaponPanel', () => {
 
   const renderWeaponPanel = (players) => {
     const $el = document.createElement('div');
@@ -11,11 +11,11 @@ describe('GameStatusPanel', () => {
       players,
       currentPlayerIndex: 0
     }
-    const gameStatusPanel = new WeaponPanel($el, props, events);
-    gameStatusPanel.render();
+    const weaponPanel = new WeaponPanel($el, props, events);
+    weaponPanel.render();
     const weaponButtons = $el.querySelectorAll('.weapon-btn');
     return {
-      gameStatusPanel,
+      weaponPanel,
       weaponButtons,
       events
     }
