@@ -1,6 +1,8 @@
 import SimpleComponent from './SimpleComponent';
 import { GAME_STATUS } from '../constants';
 
+import './ResultsPanel.scss';
+
 export default class ResultsPanel extends SimpleComponent {
 
   shouldDisplay() {

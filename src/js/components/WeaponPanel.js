@@ -9,13 +9,19 @@ const Weapon = name => `
 </li>`;
 
 const CPUTurn = player => `
-  <div>
+  <div class="cpu-turn">
+    <i class="fas fa-cog fa-6x fa-spin"></i>
     <h4>${player.name} is thinking</h4>
-    <i class="fas fa-cog fa-spin"></i>
   </div>
 `
 
-const HumanTurn = player => WEAPON_CHOICES.map(name => Weapon(name, player)).join('');
+const HumanTurn = player => {
+  return (`
+    <ul>
+      ${WEAPON_CHOICES.map(name => Weapon(name, player)).join('')}
+    </ul>
+  `);
+}
 
 export default class WeaponPanel extends SimpleComponent {
 
@@ -44,17 +50,15 @@ export default class WeaponPanel extends SimpleComponent {
     const currentPlayer = this.getCurrentPlayer();
     return `<div class="weapon">
     <div class="weapon-inner">
-        <h3>${currentPlayer.name}: Make your move</h3>
-        <ul>
+        <h3>${currentPlayer.name}: Your turn</h3>
           ${currentPlayer.isCPU ? CPUTurn(currentPlayer) : HumanTurn(currentPlayer)}
-        </ul>
     </div>
   </div>`
   }
 
   afterRender() {
     if (this.getCurrentPlayer().isCPU && this.props.status === GAME_STATUS.IN_PROGRESS) {
-      setTimeout(this.simulateCPUTurn.bind(this), 3000);
+      setTimeout(this.simulateCPUTurn.bind(this), 2000);
     }
   }
 

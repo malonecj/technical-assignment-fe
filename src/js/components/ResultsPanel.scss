@@ -1,0 +1,10 @@
+@import '../../css/variables.scss';
+
+.results-panel {
+    @include panel;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}

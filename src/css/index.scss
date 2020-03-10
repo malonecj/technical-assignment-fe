@@ -1,21 +1,22 @@
 @import './style.css';
+@import './variables.scss';
 
 body {
-	background-color: green;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  background-color: $light-grey;
+  
+  h2 {
+    color: $orange;
+  }
 
 	h1 {
-		color: white;
-	}
-
-	.game-status {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-evenly;
-	}
+    color: $dark-blue;
+    text-align: center;
+  }
 
 	.toolbar {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-	}
+  }
 }

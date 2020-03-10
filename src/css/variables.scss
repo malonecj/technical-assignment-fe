@@ -1,0 +1,13 @@
+/* COLOURS */
+$light-grey: #D9E1E8;
+$dark-blue: #294B73;
+$blue: #40609B;
+$orange: #B5633E;
+$yellow: #FBC409;
+
+@mixin panel {
+  border-radius: 1rem 1rem 1rem 1rem;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: $yellow;
+}

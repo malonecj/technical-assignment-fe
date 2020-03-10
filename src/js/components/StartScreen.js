@@ -1,5 +1,7 @@
 import SimpleComponent from './SimpleComponent';
 
+import './StartScreen.scss';
+
 const createPlayers = ({ isSimulated }) => {
   const player1 = {
     name: 'Player 1',
@@ -43,8 +45,16 @@ export default class StartScreen extends SimpleComponent {
     return `
     <div class="start-screen">
       <h2>Choose your game type</h2>
-      <button id="startBtn">Start Game (You v Computer)</button>
-      <button id="simulateBtn">Simulate Game (Computer v Computer)</button>
+      <div class="controls">
+        <button id="startBtn">
+          <div><i class="fas fa-3x fa-user"></i> v <i class="fas fa-3x fa-desktop"></i></div>
+          <div class="text">Start Game</div>
+        </button>
+        <button id="simulateBtn">
+          <i class="fas fa-3x fa-desktop"></i> v <i class="fas fa-3x fa-desktop"></i>
+          <div class="text">Simulate</div>
+        </button>
+      </div>
     </div>
     `
   }

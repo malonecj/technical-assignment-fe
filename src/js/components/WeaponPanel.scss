@@ -1,26 +1,20 @@
-/* COLOURS */
-$dark-grey: #333;
-$white: #f9f9f9;
-$duck-blue: #78d1dc;
-$purple: #eee1fe;
-$yellow: #f9edc5;
-$pink: #ffcbe2;
-$green: #ade9dd;
+@import '../../css/variables.scss';
 
 .weapon {
+    color: $dark-blue;
     bottom: 0;
-    background-color: $purple;
+    background-color: $yellow;
     border-radius: 1rem 1rem 1rem 1rem;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-left: 10px;
+    margin-right: 10px;
 
     .weapon-chosen & {
         bottom: -100%;
     }
 
     h3 {
-        font-size: 2.5rem;
-        margin-bottom: 4rem;
+        padding-top: 20px;
+        font-size: 2rem;
         text-align: center;
     }
 
@@ -37,7 +31,6 @@ $green: #ade9dd;
     li {
         width: 24vw;
         height: 24vw;
-        max-height: 200px;
         cursor: pointer;
         margin: 1rem;
         background-size: 70%;
@@ -45,8 +38,14 @@ $green: #ade9dd;
 
     }
 
+    .cpu-turn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .fa-stack {
         pointer-events: none;
-        font-size: 6vw;
+        font-size: 8vw;
     }
 }
