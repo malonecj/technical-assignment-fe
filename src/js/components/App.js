@@ -1,35 +1,18 @@
 import WeaponPanel from './WeaponPanel';
 import GameStatus from './GameStatus';
 import ResultsPanel from './ResultsPanel';
+import StartScreen from './StartScreen';
 import { GAME_STATUS } from '../constants'; 
 import { determineWinner } from '../rulesEngine';
-
-const createPlayers = () => {
-  const player1 = {
-    name: 'Player 1',
-    isCPU: false,
-    choice: undefined,
-  };
-  const player2 = {
-    name: 'Computer',
-    isCPU: true,
-    choice: undefined,
-  }
-  return [player1, player2];
-}
 
 class App {
 
   constructor() {
-    const players = createPlayers();
     this.state = {
-      players,
       currentPlayerIndex: 0,
-      status: GAME_STATUS.IN_PROGRESS,
+      status: GAME_STATUS.NOT_STARTED,
     }
-    this.createWeaponPanel();
-    this.createGameStatus();
-    this.createResultsPanel();
+    this.createStartScreen();
     this.render();
   }
 
@@ -42,6 +25,11 @@ class App {
       this.state.status = determineWinner(players[0].choice, players[1].choice);
     }
     this.render();
+  }
+
+  createStartScreen() {
+    const $el = document.getElementById('startScreen');
+    this.startScreen= new StartScreen($el, this.state, { startGame: this.startGame.bind(this) });
   }
 
   createWeaponPanel() {
@@ -59,10 +47,35 @@ class App {
     this.resultsPanel = new ResultsPanel($el, this.state);
   }
 
-  render() {
+  startGame(players) {
+    this.state.players = players;
+    this.state.status = GAME_STATUS.IN_PROGRESS;
+    this.createWeaponPanel();
+    this.createGameStatus();
+    this.createResultsPanel();
+    this.render();
+  }
+
+  renderStartScreen() {
+    this.startScreen.render();
+    this.weaponPanel.hide();
+    this.gameStatus.hide();
+    this.resultsPanel.hide();
+  }
+
+  renderGameScreen() {
     this.weaponPanel.render();
     this.gameStatus.render();
     this.resultsPanel.render();
+    this.startScreen.hide();
+  }
+
+  render() {
+    if(this.state.status === GAME_STATUS.NOT_STARTED) {
+      this.renderStartScreen();
+    } else {
+      this.renderGameScreen();
+    }
   }
 }
 

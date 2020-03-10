@@ -9,7 +9,7 @@ export default class ResultsPanel extends SimpleComponent {
   }
 
   getWinner() {
-    const { players } = this.props;
+    const { players, status } = this.props;
     if (status === GAME_STATUS.PLAYER1_WIN) {
       return { winner: players[0], loser: players[1] };
     }
