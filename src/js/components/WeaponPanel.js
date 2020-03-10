@@ -19,13 +19,20 @@ const HumanTurn = player => WEAPON_CHOICES.map(name => Weapon(name, player)).joi
 
 export default class WeaponPanel extends SimpleComponent {
 
+  constructor(container, props, events) {
+    super(container, props, events);
+    this.chooseWeapon = this.chooseWeapon.bind(this);
+  }
+
+  chooseWeapon(event) {
+    const choice = event.target.dataset.weapon;
+    if (WEAPON_CHOICES.indexOf(choice) > -1) {
+      this.events.onWeaponChosen(choice);
+    }
+  }
+
   bindEventListeners() {
-    this.container.addEventListener('click', (event) => {
-      const choice = event.target.dataset.weapon;
-      if (WEAPON_CHOICES.indexOf(choice) > -1) {
-        this.events.onWeaponChosen(choice);
-      }
-    })
+    this.container.addEventListener('click', this.chooseWeapon);
   }
 
   getCurrentPlayer() {

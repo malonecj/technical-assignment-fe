@@ -11,8 +11,12 @@ class App {
     this.state = {
       currentPlayerIndex: 0,
       status: GAME_STATUS.NOT_STARTED,
+      players: [],
     }
     this.createStartScreen();
+    this.createWeaponPanel();
+    this.createGameStatus();
+    this.createResultsPanel();
     this.render();
   }
 
@@ -29,17 +33,23 @@ class App {
 
   createStartScreen() {
     const $el = document.getElementById('startScreen');
-    this.startScreen= new StartScreen($el, this.state, { startGame: this.startGame.bind(this) });
+    this.startScreen= new StartScreen($el, this.state, { 
+      startGame: this.startGame.bind(this) 
+    });
   }
 
   createWeaponPanel() {
     const $el = document.getElementById('weaponPanel');
-    this.weaponPanel = new WeaponPanel($el, this.state, { onWeaponChosen: this.onWeaponChosen.bind(this) });
+    this.weaponPanel = new WeaponPanel($el, this.state, { 
+      onWeaponChosen: this.onWeaponChosen.bind(this)
+    });
   }
 
   createGameStatus() {
     const $el = document.getElementById('gameStatus');
-    this.gameStatus = new GameStatus($el, this.state);
+    this.gameStatus = new GameStatus($el, this.state, { 
+      restartGame: this.resetGame.bind(this)
+    });
   }
 
   createResultsPanel() {
@@ -50,24 +60,33 @@ class App {
   startGame(players) {
     this.state.players = players;
     this.state.status = GAME_STATUS.IN_PROGRESS;
-    this.createWeaponPanel();
-    this.createGameStatus();
-    this.createResultsPanel();
+    this.render();
+  }
+
+  resetGame() {
+    this.state = {
+      currentPlayerIndex: 0,
+      status: GAME_STATUS.NOT_STARTED,
+      players: [],
+    }
     this.render();
   }
 
   renderStartScreen() {
-    this.startScreen.render();
-    this.weaponPanel.hide();
-    this.gameStatus.hide();
-    this.resultsPanel.hide();
+    this.startScreen.render(this.state);
+    this.weaponPanel && this.weaponPanel.hide();
+    this.gameStatus && this.gameStatus.hide();
+    this.resultsPanel && this.resultsPanel.hide();
   }
 
-  renderGameScreen() {
-    this.weaponPanel.render();
-    this.gameStatus.render();
-    this.resultsPanel.render();
+  renderGameScreen() {  
+    this.gameStatus.render(this.state);
+    this.resultsPanel.render(this.state);
+    this.weaponPanel.render(this.state);
     this.startScreen.hide();
+    if(this.state.status !== GAME_STATUS.IN_PROGRESS) {
+      this.weaponPanel.hide();
+    }
   }
 
   render() {

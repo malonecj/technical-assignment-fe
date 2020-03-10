@@ -16,6 +16,12 @@ const createPlayers = ({ isSimulated }) => {
 
 export default class StartScreen extends SimpleComponent {
 
+  constructor(container, props, events) {
+    super(container, props, events);
+    this.startGame = this.startGame.bind(this);
+    this.simulateGame = this.simulateGame.bind(this);
+  }
+
   startGame() {
     const players = createPlayers({ isSimulated: false });
     this.events.startGame(players);
@@ -29,14 +35,14 @@ export default class StartScreen extends SimpleComponent {
   bindEventListeners() {
     const startBtn = this.container.querySelector('#startBtn');
     const simulateBtn = this.container.querySelector('#simulateBtn');
-    startBtn.addEventListener('click', () => this.startGame());
-    simulateBtn.addEventListener('click', () => this.simulateGame());
+    startBtn.addEventListener('click', this.startGame);
+    simulateBtn.addEventListener('click', this.simulateGame);
   }
 
   template() {
     return `
     <div class="start-screen">
-      <h2>Select Game Type</h2>
+      <h2>Choose your game type</h2>
       <button id="startBtn">Start Game (You v Computer)</button>
       <button id="simulateBtn">Simulate Game (Computer v Computer)</button>
     </div>

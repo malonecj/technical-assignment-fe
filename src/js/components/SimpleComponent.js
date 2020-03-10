@@ -5,7 +5,10 @@ export default class SimpleComponent {
     this.events = events;
   }
 
-  render() {
+  render(newProps) {
+    if(newProps) {
+      this.props = newProps;
+    }
     if (typeof this.template === 'function') {
       this.container.innerHTML = this.template();
     } else {
