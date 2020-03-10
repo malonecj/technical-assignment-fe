@@ -1,21 +1,8 @@
 import GameStatusPanel from './GameStatusPanel';
 import { ROCK, PAPER } from '../constants';
+import { createTestPlayers, getIconText } from '../../../test/helpers';
 
 describe('GameStatusPanel', () => {
-
-  const createTestPlayer = (name, choice) => {
-    return {
-      name,
-      isCPU: false,
-      choice
-    }
-  }
-
-  const createTestPlayers = () => (
-    [createTestPlayer('p1'), createTestPlayer('p2')]
-  )
-
-  const getPlayerChoiceText = (choice) => choice.querySelector('.fa-layers-text').textContent;
 
   const renderGameStatusPanel = (players) => {
     const $el = document.createElement('div');
@@ -38,7 +25,7 @@ describe('GameStatusPanel', () => {
     players[0].choice = ROCK;
     const { playerChoices } = renderGameStatusPanel(players);
     expect(playerChoices.length).toEqual(2);
-    expect(getPlayerChoiceText(playerChoices[0])).toEqual(ROCK);
+    expect(getIconText(playerChoices[0])).toEqual(ROCK);
   });
 
   it('should render player2s choice', () => {
@@ -47,7 +34,7 @@ describe('GameStatusPanel', () => {
     players[1].choice = PAPER;
     const { playerChoices } = renderGameStatusPanel(players);
     expect(playerChoices.length).toEqual(2);
-    expect(getPlayerChoiceText(playerChoices[1])).toEqual(PAPER);
+    expect(getIconText(playerChoices[1])).toEqual(PAPER);
   });
 
   it('click restart should restart game', () => {

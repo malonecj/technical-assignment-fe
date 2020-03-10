@@ -3,7 +3,7 @@ import { WEAPON_CHOICES, GAME_STATUS } from '../constants';
 import Icon from './WeaponIcon';
 
 const Weapon = name => `
-  <li role="button" data-weapon="${name}">
+  <li role="button" class="weapon-btn ${name}" data-weapon="${name}">
     ${Icon({ icon: `hand-${name}`, text: name })}
 </li>`;
 
