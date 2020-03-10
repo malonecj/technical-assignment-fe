@@ -3,18 +3,20 @@ import { ROCK, PAPER, SCISSORS, GAME_STATUS } from '../constants';
 import { createTestPlayers, getIconText } from '../../../test/helpers';
 describe('WeaponPanel', () => {
 
-  const renderWeaponPanel = (players) => {
+  const renderWeaponPanel = (players, otherProps) => {
     const $el = document.createElement('div');
     const events = { onWeaponChosen: jest.fn() };
     const props = {
       status: GAME_STATUS.IN_PROGRESS,
       players,
-      currentPlayerIndex: 0
+      currentPlayerIndex: 0,
+      ...otherProps
     }
     const weaponPanel = new WeaponPanel($el, props, events);
     weaponPanel.render();
     const weaponButtons = $el.querySelectorAll('.weapon-btn');
     return {
+      $el,
       weaponPanel,
       weaponButtons,
       events
@@ -53,5 +55,14 @@ describe('WeaponPanel', () => {
     scissorsWeapon.click();
     expect(events.onWeaponChosen).toBeCalledWith(SCISSORS);
   });
+
+  it('should display loading indicator for CPU turn', async () => {
+    const players = createTestPlayers();
+    players[1].isCPU = true;
+    const { $el } = await renderWeaponPanel(players, { currentPlayerIndex: 1 });
+    const display = $el.querySelector('.cpu-turn');
+    expect(display.innerHTML).toEqual(expect.stringContaining('p2 is thinking'))
+  });
+
 
 });

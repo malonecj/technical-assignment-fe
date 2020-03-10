@@ -30,6 +30,7 @@ export default class WeaponPanel extends SimpleComponent {
   }
 
   chooseWeapon(event) {
+    console.log('eresresr');
     const choice = event.target.dataset.weapon;
     if (WEAPON_CHOICES.indexOf(choice) > -1) {
       this.events.onWeaponChosen(choice);
