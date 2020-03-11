@@ -71,16 +71,24 @@ body {
       margin-bottom: 50px;
 
       button {
+        font-size: x-small;
         cursor: pointer;
         height: 80px;
         border-radius: 1rem 1rem 1rem 1rem;
         align-items: center;
         width: 120px;
         margin: 20px;
+        @include mobile {
+          font-size: x-small;
+          width: 100px;
+        }
       }
 
       button .text {
         font-size: medium;
+        @include mobile {
+          font-size: small;
+        }
       }
     }
   }
@@ -115,7 +123,6 @@ body {
         width: 24vw;
         height: 24vw;
         cursor: pointer;
-        margin: 1rem;
         background-size: 70%;
         pointer-events: fill;
     }

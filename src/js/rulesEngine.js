@@ -3,7 +3,7 @@ import { ROCK, PAPER, SCISSORS, GAME_STATUS } from './constants';
 const rules = {
   [ROCK]: { beats: [SCISSORS] },
   [PAPER]: { beats: [ROCK] },
-  [SCISSORS]: {beats: [PAPER] }
+  [SCISSORS]: {beats: [PAPER] },
 }
 
 export function addRule(name, defeats) {
