@@ -2,8 +2,6 @@ export const ROCK = 'Rock';
 export const PAPER = 'Paper';
 export const SCISSORS = 'Scissors';
 
-export const WEAPON_CHOICES = [ROCK, PAPER, SCISSORS];
-
 export const GAME_STATUS = {
  NOT_STARTED: 'Not started',
  IN_PROGRESS: 'In progress',

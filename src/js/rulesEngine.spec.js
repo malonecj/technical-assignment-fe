@@ -1,5 +1,5 @@
-import { ROCK, PAPER, SCISSORS, GAME_STATUS } from '../src/js/constants';
-import { determineWinner } from '../src/js/rulesEngine';
+import { ROCK, PAPER, SCISSORS, GAME_STATUS } from './constants';
+import { determineWinner, addRule, getWeapons } from './rulesEngine';
 
 describe('Rules Engine', () => {
 
@@ -22,6 +22,21 @@ describe('Rules Engine', () => {
     it('returns a tie if both players make same choice', () => {
       const outcome = determineWinner(PAPER, PAPER);
       expect(outcome).toBe(GAME_STATUS.TIE);
+    });
+  });
+
+  describe('adding more rules', () => {
+    it('should be able to add new rules', () => {
+      addRule('Lizard', 'Spock');
+      const outcome = determineWinner('Lizard', 'Spock');
+      expect(outcome).toBe(GAME_STATUS.PLAYER1_WIN);
+    });
+
+    it('adding rule should add to weapon list', () => {
+      addRule('Lizard', 'Spock');
+      addRule('Spock', SCISSORS);
+      const weapons = getWeapons();
+      expect(weapons).toEqual([ROCK, PAPER, SCISSORS, 'Lizard', 'Spock']);
     });
   });
 

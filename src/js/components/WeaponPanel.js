@@ -1,5 +1,6 @@
 import SimpleComponent from './SimpleComponent';
-import { WEAPON_CHOICES, GAME_STATUS } from '../constants';
+import { GAME_STATUS } from '../constants';
+import { getWeapons } from '../rulesEngine';
 import Icon from './WeaponIcon';
 
 const Weapon = name => `
@@ -17,7 +18,7 @@ const CPUTurn = player => `
 const HumanTurn = player => {
   return (`
     <ul>
-      ${WEAPON_CHOICES.map(name => Weapon(name, player)).join('')}
+      ${getWeapons().map(name => Weapon(name, player)).join('')}
     </ul>
   `);
 }
@@ -30,9 +31,8 @@ export default class WeaponPanel extends SimpleComponent {
   }
 
   chooseWeapon(event) {
-    console.log('eresresr');
     const choice = event.target.dataset.weapon;
-    if (WEAPON_CHOICES.indexOf(choice) > -1) {
+    if (getWeapons().indexOf(choice) > -1) {
       this.events.onWeaponChosen(choice);
     }
   }
@@ -63,7 +63,8 @@ export default class WeaponPanel extends SimpleComponent {
   }
 
   simulateCPUTurn() {
-    const choice = WEAPON_CHOICES[Math.floor(Math.random() * WEAPON_CHOICES.length)];
+    const weaponChoices = getWeapons();
+    const choice = weaponChoices[Math.floor(Math.random() * weaponChoices.length)];
     this.events.onWeaponChosen(choice);
   }
 

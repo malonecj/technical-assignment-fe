@@ -7,14 +7,13 @@ const rules = {
 }
 
 export function addRule(name, defeats) {
-  const defeatableOptions = Array.isArray(defeats) ? [defeats] : defeats;
+  const defeatableOptions = Array.isArray(defeats) ? defeats : [defeats];
   if(rules[name]) {
     rules[name].beats = [...rules[name].beats, ...defeatableOptions];
   } else {
-    rules[name] = { beats: [...defeatableOptions] };
+    rules[name] = { beats: defeatableOptions };
   }
 }
-
 
 export function determineWinner(player1Choice, player2Choice) {
   if(player1Choice === player2Choice) {
@@ -27,4 +26,8 @@ export function determineWinner(player1Choice, player2Choice) {
     return GAME_STATUS.PLAYER2_WIN;
   }
   throw new Error("No winner could be determined");
+}
+
+export function getWeapons() {
+  return Object.getOwnPropertyNames(rules);
 }
