@@ -25,7 +25,7 @@ export default class GameStatusPanel extends SimpleComponent {
         ${this.props.players.map(p => PlayerChoice(p)).join('')}
       </div>
       <div class="toolbar">
-        <button id="restartBtn">Restart Game</button>
+        <button id="restartBtn" tabIndex="0">Restart Game</button>
       </div>
     </div>
     `

@@ -13,3 +13,5 @@ export const GAME_STATUS = {
 export const EVENT_TYPES = {
   WEAPON_CHOSEN: 'WEAPON_CHOSEN',
 }
+
+export const KEYPRESS_ENTER = 13;

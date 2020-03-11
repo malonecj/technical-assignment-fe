@@ -32,7 +32,7 @@ describe('WeaponPanel', () => {
     expect(getIconText(weaponButtons[2])).toEqual(SCISSORS);
   });
 
-  it('clicking rock button should triiger rock chosen event', () => {
+  it('clicking rock button should trigger rock chosen event', () => {
     const players = createTestPlayers();
     const { weaponButtons, events } = renderWeaponPanel(players);
     const rockWeapon = weaponButtons[0];
@@ -40,7 +40,7 @@ describe('WeaponPanel', () => {
     expect(events.onWeaponChosen).toBeCalledWith(ROCK);
   });
 
-  it('clicking paper button should triiger paper chosen event', () => {
+  it('clicking paper button should trigger paper chosen event', () => {
     const players = createTestPlayers();
     const { weaponButtons, events } = renderWeaponPanel(players);
     const paperWeapon = weaponButtons[1];
@@ -48,11 +48,21 @@ describe('WeaponPanel', () => {
     expect(events.onWeaponChosen).toBeCalledWith(PAPER);
   });
 
-  it('clicking scissors button should triiger scissors chosen event', () => {
+  it('clicking scissors button should trigger scissors chosen event', () => {
     const players = createTestPlayers();
     const { weaponButtons, events } = renderWeaponPanel(players);
     const scissorsWeapon = weaponButtons[2];
     scissorsWeapon.click();
+    expect(events.onWeaponChosen).toBeCalledWith(SCISSORS);
+  });
+
+  it('pressing enter on a weapon should triger weapon event', () => {
+    const players = createTestPlayers();
+    const { weaponButtons, events } = renderWeaponPanel(players);
+    const scissorsWeapon = weaponButtons[2];
+    scissorsWeapon.click();
+    scissorsWeapon.dispatchEvent(new Event('focus'));
+    scissorsWeapon.dispatchEvent(new KeyboardEvent('keypress',{'key':'a'}));
     expect(events.onWeaponChosen).toBeCalledWith(SCISSORS);
   });
 

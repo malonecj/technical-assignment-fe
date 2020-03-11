@@ -13,6 +13,6 @@ describe('App', () => {
   it('should render a start screen on initialisation', () => {
     const { $el } = renderApp();
     const startScreen = $el.querySelector('.start-screen')
-    expect(startScreen.innerHTML).toEqual(expect.stringContaining("Choose your game type"));
+    expect(startScreen.innerHTML).toEqual(expect.stringContaining("Select an option"));
   });
 });

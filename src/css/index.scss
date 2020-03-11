@@ -6,7 +6,7 @@ body {
   background-color: $light-grey;
   
   h2 {
-    color: $orange;
+    color: $dark-blue;
   }
 
 	h1 {
@@ -80,7 +80,7 @@ body {
         height: 80px;
         border-radius: 1rem 1rem 1rem 1rem;
         align-items: center;
-        width: 120px;
+        width: 140px;
         margin: 20px;
         font-size: small;
         transition: all .2s ease-in-out;
@@ -128,6 +128,8 @@ body {
         pointer-events: fill;
         transition: all .2s ease-in-out;
     }
+
+    li:focus { color: $orange; outline: none; }
 
     li:hover { transform: scale(1.1); }
 

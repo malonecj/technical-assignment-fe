@@ -1,10 +1,10 @@
 import SimpleComponent from './SimpleComponent';
-import { GAME_STATUS } from '../constants';
+import { GAME_STATUS, KEYPRESS_ENTER } from '../constants';
 import { getWeapons } from '../rulesEngine';
 import Icon from './WeaponIcon';
 
-const Weapon = name => `
-  <li role="button" class="weapon-btn ${name}" data-weapon="${name}">
+const Weapon = (name) => `
+  <li tabIndex="0" role="button" class="weapon-btn ${name}" data-weapon="${name}">
     ${Icon({ icon: `hand-${name}`, text: name })}
 </li>`;
 
@@ -15,10 +15,10 @@ const CPUTurn = player => `
   </div>
 `
 
-const HumanTurn = player => {
+const HumanTurn = () => {
   return (`
     <ul>
-      ${getWeapons().map(name => Weapon(name, player)).join('')}
+      ${getWeapons().map((name, i) => Weapon(name, i + 1)).join('')}
     </ul>
   `);
 }
@@ -28,6 +28,7 @@ export default class WeaponPanel extends SimpleComponent {
   constructor(container, props, events) {
     super(container, props, events);
     this.chooseWeapon = this.chooseWeapon.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
   }
 
   chooseWeapon(event) {
@@ -37,8 +38,15 @@ export default class WeaponPanel extends SimpleComponent {
     }
   }
 
+  onKeyDown(event) {
+    if (event.keyCode === KEYPRESS_ENTER) {
+      this.chooseWeapon(event);
+    }
+  }
+
   bindEventListeners() {
     this.container.addEventListener('click', this.chooseWeapon);
+    this.container.addEventListener("keydown", this.onKeyDown); 
   }
 
   getCurrentPlayer() {
