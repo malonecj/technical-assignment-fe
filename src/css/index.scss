@@ -69,26 +69,27 @@ body {
     .controls {
       flex-direction: row;
       margin-bottom: 50px;
+      @include mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
       button {
-        font-size: x-small;
         cursor: pointer;
         height: 80px;
         border-radius: 1rem 1rem 1rem 1rem;
         align-items: center;
         width: 120px;
         margin: 20px;
-        @include mobile {
-          font-size: x-small;
-          width: 100px;
-        }
+        font-size: small;
+        transition: all .2s ease-in-out;
       }
+
+      button:hover { transform: scale(1.1); }
 
       button .text {
         font-size: medium;
-        @include mobile {
-          font-size: small;
-        }
       }
     }
   }
@@ -125,7 +126,10 @@ body {
         cursor: pointer;
         background-size: 70%;
         pointer-events: fill;
+        transition: all .2s ease-in-out;
     }
+
+    li:hover { transform: scale(1.1); }
 
     .cpu-turn {
       display: flex;

@@ -42,7 +42,7 @@ export default class StartScreen extends SimpleComponent {
   template() {
     return `
     <div class="start-screen">
-      <h2>Choose your game type</h2>
+      <h2>Select an option</h2>
       <div class="controls">
         <button id="startBtn">
           <div><i class="fas fa-3x fa-user"></i> v <i class="fas fa-3x fa-desktop"></i></div>
