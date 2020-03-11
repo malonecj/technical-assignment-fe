@@ -1,13 +1,15 @@
 import SimpleComponent from './SimpleComponent';
 
 const createPlayers = ({ isSimulated }) => {
+  const player1Name = isSimulated ? 'Computer Player 1' : 'Player 1';
+  const player2Name = isSimulated ? 'Computer Player 2' : 'Computer';
   const player1 = {
-    name: 'Player 1',
+    name: player1Name,
     isCPU: isSimulated,
     choice: undefined,
   };
   const player2 = {
-    name: 'Player 2',
+    name: player2Name,
     isCPU: true,
     choice: undefined,
   }

@@ -33,7 +33,7 @@ describe('StartScreen', () => {
         choice: undefined,
       },
       {
-        name: 'Player 2',
+        name: 'Computer',
         isCPU: true,
         choice: undefined,
       }
@@ -47,12 +47,12 @@ describe('StartScreen', () => {
     simulateButton.click();
     const expectedPlayers = [
       {
-        name: 'Player 1',
+        name: 'Computer Player 1',
         isCPU: true,
         choice: undefined,
       },
       {
-        name: 'Player 2',
+        name: 'Computer Player 2',
         isCPU: true,
         choice: undefined,
       }
